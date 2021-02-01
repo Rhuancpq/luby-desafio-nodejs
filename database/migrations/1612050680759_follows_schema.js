@@ -7,9 +7,15 @@ class FollowSchema extends Schema {
   up() {
     this.create("follows", (table) => {
       table.increments();
-      table.integer("follower_id").unsigned().references("id").inTable("users");
+      table
+        .integer("followed_id")
+        .notNullable()
+        .unsigned()
+        .references("id")
+        .inTable("users");
       table
         .integer("following_id")
+        .notNullable()
         .unsigned()
         .references("id")
         .inTable("users");

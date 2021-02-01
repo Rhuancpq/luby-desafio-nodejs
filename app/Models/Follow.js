@@ -4,12 +4,12 @@
 const Model = use("Model");
 
 class Follow extends Model {
-  follower() {
-    return this.belongsTo("App/Models/User");
+  followed() {
+    return this.belongsTo("App/Models/User", "followed_id");
   }
 
   following() {
-    return this.belongsTo("App/Models/User");
+    return this.belongsTo("App/Models/User", "following_id");
   }
 }
 

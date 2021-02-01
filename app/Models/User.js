@@ -9,11 +9,15 @@ class User extends Model {
   }
 
   followers() {
-    return this.hasMany("App/Models/Follow", "id", "follower_id");
+    return this.hasMany("App/Models/Follow", "id", "followed_id");
   }
 
   following() {
     return this.hasMany("App/Models/Follow", "id", "following_id");
+  }
+
+  repositories() {
+    return this.hasMany("App/Models/Repository");
   }
 }
 
