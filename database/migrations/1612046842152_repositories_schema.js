@@ -11,6 +11,12 @@ class RepositoriesSchema extends Schema {
       table.string("description").notNullable();
       table.boolean("public").notNullable().defaultTo(true);
       table.string("slug").notNullable();
+      table
+        .integer("user_id")
+        .notNullable()
+        .unsigned()
+        .references("id")
+        .inTable("users");
       table.timestamps();
     });
   }

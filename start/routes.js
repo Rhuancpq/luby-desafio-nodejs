@@ -17,3 +17,5 @@
 const Route = use("Route");
 
 Route.resource("users", "UserController").apiOnly();
+Route.get("users/:id/repositories", "UserRepositoryController.index");
+Route.resource("repositories", "RepositoryController").apiOnly();

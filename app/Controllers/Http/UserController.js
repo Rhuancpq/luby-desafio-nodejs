@@ -21,7 +21,7 @@ class UserController {
    */
   async index({ request, response, view }) {
     response.json(await User.all());
-    response.status(200);
+    response.accepted();
   }
 
   /**
