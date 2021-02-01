@@ -12,7 +12,7 @@ class User extends Model {
     return this.hasMany("App/Models/Follow", "id", "followed_id");
   }
 
-  following() {
+  followings() {
     return this.hasMany("App/Models/Follow", "id", "following_id");
   }
 

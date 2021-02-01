@@ -36,8 +36,9 @@ class RepositoryController {
   async store({ request, response }) {
     const repo = new Repository();
     const data = request.all();
+    let user;
     try {
-      const user = await User.findOrFail(data.user_id);
+      user = await User.findOrFail(data.user_id);
     } catch (ModelNotFoundException) {
       response.notFound("User not found");
     }
@@ -46,7 +47,7 @@ class RepositoryController {
     repo.description = data.description;
     repo.publice = data.public;
     repo.slug = user.nome + data.nome;
-    repo.user_id = data.user_id;
+    repo.user_id = user.id;
 
     await repo.save();
   }
@@ -84,7 +85,7 @@ class RepositoryController {
       repo.nome = data.nome;
       repo.description = data.description;
       repo.publice = data.public;
-      repo.slug = user.nome + data.nome;
+      repo.slug = data.slug;
       repo.user_id = data.user_id;
 
       await repo.save();
