@@ -4,6 +4,10 @@
 const Model = use("Model");
 
 class Repository extends Model {
+  getStars(stars) {
+    return stars;
+  }
+
   stars() {
     return this.belongsToMany("App/Models/User");
   }

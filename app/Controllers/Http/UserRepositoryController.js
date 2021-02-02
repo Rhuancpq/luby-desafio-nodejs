@@ -15,8 +15,14 @@ class UserRepositoryController {
   async index({ params, request, response, view }) {
     try {
       const user = await User.findOrFail(params.id);
+      const repos = await user.repositories().fetch();
+      const count = await user.repositories().getCount().fetch();
+      const json = {
+        data: repos,
+        count: count,
+      };
 
-      response.json(await user.repositories().fetch());
+      response.json(json);
     } catch (ModelNotFoundException) {
       response.notFound("User not Found");
     }

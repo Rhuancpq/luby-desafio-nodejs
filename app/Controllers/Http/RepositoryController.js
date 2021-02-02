@@ -21,7 +21,13 @@ class RepositoryController {
    * @param {View} ctx.view
    */
   async index({ request, response, view }) {
-    response.json(await Repository.all());
+    repos = await Repository.all();
+    count = await Repository.getCount();
+    json = {
+      data: repos,
+      count: count,
+    };
+    response.json(json);
     response.accepted();
   }
 
