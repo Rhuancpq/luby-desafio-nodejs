@@ -27,3 +27,5 @@ Route.resource("repositories", "RepositoryController").apiOnly();
 Route.resource("follows", "FollowController").apiOnly().except(["update"]);
 Route.get("follows/:id/followed", "FollowController.showFollowed");
 Route.get("follows/:id/following", "FollowController.showFollowing");
+
+Route.resource("stars", "StarController").apiOnly().except(["update"]);

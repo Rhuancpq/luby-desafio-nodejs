@@ -5,7 +5,9 @@ const Model = use("Model");
 
 class User extends Model {
   stars() {
-    return this.belongsToMany("App/Models/Repository");
+    return this.belongsToMany("App/Models/Repository").pivotModel(
+      "App/Models/Star"
+    );
   }
 
   followers() {

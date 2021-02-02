@@ -9,7 +9,7 @@ class Repository extends Model {
   }
 
   stars() {
-    return this.belongsToMany("App/Models/User");
+    return this.belongsToMany("App/Models/User").pivotModel("App/Models/Star");
   }
 
   user() {
