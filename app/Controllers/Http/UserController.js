@@ -1,6 +1,7 @@
 "use strict";
 
 const User = require("../../Models/User");
+const { validate } = use("Validator");
 
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
@@ -37,16 +38,32 @@ class UserController {
 
     const data = request.all();
 
+    const rules = {
+      email: "required|email|unique:users,email",
+      username: "required|unique:users,username",
+      password: "required|min:8|max:60",
+      nome: "required",
+      cidade: "required",
+      estado: "required|min:2|max:2",
+    };
+
+    const validation = await validate(data, rules);
+
+    if (validation.fails()) {
+      return response.unauthorized(validation.messages());
+    }
+
     user.nome = data.nome;
     user.email = data.email;
     user.cidade = data.cidade;
     user.estado = data.estado;
     user.username = data.username;
     user.bio = data.bio;
+    user.password = data.password;
 
     await user.save();
 
-    response.status(200);
+    response.accepted();
   }
 
   /**
@@ -85,6 +102,7 @@ class UserController {
       user.cidade = data.cidade;
       user.estado = data.estado;
       user.username = data.username;
+      user.password = data.password;
       user.bio = data.bio;
 
       await user.save();

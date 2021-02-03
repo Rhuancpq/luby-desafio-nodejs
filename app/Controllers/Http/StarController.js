@@ -45,13 +45,13 @@ class StarController {
     try {
       user = await User.findOrFail(data.user_id);
     } catch (ModelNotFoundException) {
-      response.notFound("User not found");
+      return response.notFound("User not found");
     }
 
     try {
       repo = await Repository.findOrFail(data.repository_id);
     } catch (ModelNotFoundException) {
-      response.notFound("Repository not found");
+      return response.notFound("Repository not found");
     }
 
     star.user_id = user.id;

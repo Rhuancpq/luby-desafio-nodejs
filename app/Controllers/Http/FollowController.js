@@ -40,7 +40,7 @@ class FollowController {
       followed = await User.findOrFail(data.followed_id);
       following = await User.findOrFail(data.following_id);
     } catch (ModelNotFoundException) {
-      response.notFound("User not found");
+      return response.notFound("User not found");
     }
 
     follow.followed_id = followed.id;

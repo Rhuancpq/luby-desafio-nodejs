@@ -1,19 +1,25 @@
-'use strict'
+"use strict";
 
 /** @type {import('@adonisjs/lucid/src/Schema')} */
-const Schema = use('Schema')
+const Schema = use("Schema");
 
 class TokensSchema extends Schema {
-  up () {
-    this.create('tokens', (table) => {
-      table.increments()
-      table.timestamps()
-    })
+  up() {
+    this.create("tokens", (table) => {
+      table.increments();
+      table
+        .integer("user_id")
+        .notNullable()
+        .unsigned()
+        .references("id")
+        .inTable("users");
+      table.timestamps();
+    });
   }
 
-  down () {
-    this.drop('tokens')
+  down() {
+    this.drop("tokens");
   }
 }
 
-module.exports = TokensSchema
+module.exports = TokensSchema;

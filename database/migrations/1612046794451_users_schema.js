@@ -12,6 +12,7 @@ class UsersSchema extends Schema {
       table.string("cidade").notNullable();
       table.string("estado", 2).notNullable();
       table.string("username").notNullable().unique();
+      table.string("password", 60).notNullable();
       table.text("bio", ["longtext"]);
       table.timestamps();
     });

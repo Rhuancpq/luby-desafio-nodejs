@@ -16,16 +16,20 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use("Route");
 
-Route.resource("users", "UserController").apiOnly();
-Route.get("users/:id/repositories", "UserRepositoryController.index");
-Route.get("users/:id/followeds", "UserFollowController.indexFollowers");
-Route.get("users/:id/followings", "UserFollowController.indexFollowings");
-Route.get("users/:id/follow", "UserFollowController.store");
+Route.group(() => {
+  Route.resource("users", "UserController").apiOnly();
+  Route.get("users/:id/repositories", "UserRepositoryController.index");
+  Route.get("users/:id/followeds", "UserFollowController.indexFollowers");
+  Route.get("users/:id/followings", "UserFollowController.indexFollowings");
+  Route.get("users/:id/follow", "UserFollowController.store");
 
-Route.resource("repositories", "RepositoryController").apiOnly();
+  Route.resource("repositories", "RepositoryController").apiOnly();
 
-Route.resource("follows", "FollowController").apiOnly().except(["update"]);
-Route.get("follows/:id/followed", "FollowController.showFollowed");
-Route.get("follows/:id/following", "FollowController.showFollowing");
+  Route.resource("follows", "FollowController").apiOnly().except(["update"]);
+  Route.get("follows/:id/followed", "FollowController.showFollowed");
+  Route.get("follows/:id/following", "FollowController.showFollowing");
 
-Route.resource("stars", "StarController").apiOnly().except(["update"]);
+  Route.resource("stars", "StarController").apiOnly().except(["update"]);
+
+  Route.post("auth/sign-in", "AuthController.signIn");
+}).prefix("api/vi");
